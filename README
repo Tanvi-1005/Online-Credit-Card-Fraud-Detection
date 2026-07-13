@@ -1,0 +1,39 @@
+# Credit Card Fraud Detection
+
+This project uses machine learning to identify fraudulent credit card transactions. It includes the complete pipeline from data preprocessing and model training to API deployment.
+
+## File Descriptions
+
+### Core Application
+- **`app.py`**: A FastAPI-based web server that provides a `/predict` endpoint for real-time fraud detection and a `/health` endpoint for monitoring.
+- **`fraud_model_bundle.pkl`**: The serialized model bundle containing the trained Random Forest classifier, categorical encoders, and feature names.
+
+### Data Science & Training
+- **`model training.ipynb`**: The primary notebook for Exploratory Data Analysis (EDA), feature engineering, model training, and evaluation.
+- **`dataset.ipynb`**: Handles initial data ingestion and sampling from the raw source data.
+- **`data_prep.ipynb`**: Performs data cleaning, structural transformations, and feature selection using Polars.
+- **`backend_data.ipynb`**: Used for generating test data and JSON structures for API testing.
+- **`load and test the saved model.ipynb`**: A utility notebook to verify the functionality of the saved `.pkl` model file.
+
+### Metadata & Configuration
+- **`categorical_mappings.json`**: Stores the integer-to-string mappings for categorical features used by the encoder.
+- **`unique_categories.json`**: List of all unique categorical values seen during training.
+- **`requirements.txt`**: List of Python dependencies required for production deployment (Render).
+- **`pyproject.toml` / `uv.lock`**: Project management files used for local development and dependency locking.
+
+### Datasets
+- **`final_dataset_11k.csv`**: The clean, curated dataset used for the final model training.
+- **`balanced_fraud_10k.csv`**: A balanced version of the dataset optimized for training.
+- **`filtered_dataset_11k.csv`**: Intermediate dataset processed for model specific requirements.
+- **`fraud_test_data_with_label.csv/json`**: Ground truth data used for final model validation.
+- **`fraud_test_data_without_label.csv/json`**: Unlabeled data samples for testing API endpoints.
+- **`sample_15_rows.csv`**: A small snippet of data for quick reference or debugging.
+
+---
+## API Endpoints
+
+### `POST /predict`
+Submit transaction details as JSON to receive a fraud prediction and risk level.
+
+### `GET /health`
+Returns a status message to keep the server online and monitor uptime.
